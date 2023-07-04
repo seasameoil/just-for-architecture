@@ -29,7 +29,10 @@ public class CommentService implements CrudInterface<CommentRequest, CommentResp
                 .post(postRepository.findById(commentRequest.getPostId()).get())
                 .build();
 
-        CommentResponse commentResponse = buildCommentResponse(commentRepository.save(comment));
+        commentRepository.save(comment);
+
+        CommentResponse commentResponse = new CommentResponse();
+        commentResponse.build(comment);
 
         return commentResponse;
     }
@@ -39,7 +42,8 @@ public class CommentService implements CrudInterface<CommentRequest, CommentResp
 
         Comment comment = commentRepository.findById(id).get();
 
-        CommentResponse commentResponse = buildCommentResponse(comment);
+        CommentResponse commentResponse = new CommentResponse();
+        commentResponse.build(comment);
 
         return commentResponse;
     }
@@ -50,10 +54,10 @@ public class CommentService implements CrudInterface<CommentRequest, CommentResp
 
         Comment comment = commentRepository.findById(id).get();
 
-        comment.setContent(comment.getContent());
-        comment.setNickName(comment.getNickName());
+        comment.update(commentRequest);
 
-        CommentResponse commentResponse = buildCommentResponse(commentRepository.save(comment));
+        CommentResponse commentResponse = new CommentResponse();
+        commentResponse.build(comment);
 
         return commentResponse;
     }
@@ -70,7 +74,7 @@ public class CommentService implements CrudInterface<CommentRequest, CommentResp
     }
 
     // <------------- commentResponse 빌드 ------------>
-    private CommentResponse buildCommentResponse(Comment comment) {
+    /*private CommentResponse buildCommentResponse(Comment comment) {
 
         CommentResponse commentResponse = CommentResponse.builder()
                 .nickName(comment.getNickName())
@@ -78,5 +82,5 @@ public class CommentService implements CrudInterface<CommentRequest, CommentResp
                 .build();
 
         return commentResponse;
-    }
+    }*/
 }

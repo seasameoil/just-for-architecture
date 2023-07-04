@@ -67,7 +67,9 @@ public class PostService implements CrudInterface<PostRequest, PostResponse> {
     public Long delete(Long id) {
 
         try {
+            commentRepository.deleteAllByPost(postRepository.findById(id));
             postRepository.deleteById(id);
+
             return id;
         } catch (Exception e) {
             return 0l;
@@ -82,7 +84,8 @@ public class PostService implements CrudInterface<PostRequest, PostResponse> {
 
         for (Comment com : comments) {
 
-            commentResponses.add(buildCommentResponse(com));
+            CommentResponse commentResponse = new CommentResponse();
+            commentResponses.add(commentResponse.build(com));
         }
 
         String nickName = post.getMember().getNickName();
@@ -96,7 +99,7 @@ public class PostService implements CrudInterface<PostRequest, PostResponse> {
         return postResponse;
     }
 
-    private CommentResponse buildCommentResponse(Comment comment) {
+    /*private CommentResponse buildCommentResponse(Comment comment) {
 
         CommentResponse commentResponse = CommentResponse.builder()
                 .nickName(comment.getNickName())
@@ -104,5 +107,5 @@ public class PostService implements CrudInterface<PostRequest, PostResponse> {
                 .build();
 
         return commentResponse;
-    }
+    }*/
 }

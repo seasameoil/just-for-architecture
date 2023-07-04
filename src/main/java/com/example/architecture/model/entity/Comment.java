@@ -1,5 +1,7 @@
 package com.example.architecture.model.entity;
 
+import com.example.architecture.model.request.CommentRequest;
+import com.example.architecture.model.response.CommentResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,4 +20,10 @@ public class Comment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     Post post;
+
+    public void update(CommentRequest commentRequest) {
+
+        this.content = commentRequest.getContent();
+        this.nickName = commentRequest.getNickName();
+    }
 }
