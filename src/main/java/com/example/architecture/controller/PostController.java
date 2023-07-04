@@ -1,8 +1,8 @@
 package com.example.architecture.controller;
 
-import com.example.architecture.model.request.MemberRequest;
-import com.example.architecture.model.response.MemberResponse;
-import com.example.architecture.service.MemberService;
+import com.example.architecture.model.request.PostRequest;
+import com.example.architecture.model.response.PostResponse;
+import com.example.architecture.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/member")
-public class MemberController implements BaseController<MemberRequest, MemberResponse> {
+@RequestMapping("/post")
+public class PostController implements BaseController<PostRequest, PostResponse> {
 
-    private final MemberService memberService;
+    private final PostService postService;
 
     @Override
     @PostMapping("/create")
-    public ResponseEntity create(@RequestPart(name = "data") MemberRequest request) {
+    public ResponseEntity create(@RequestPart(name = "data") PostRequest postRequest) {
 
-        //System.out.println(request.getMemberName());
-        MemberResponse response = memberService.create(request);
+        PostResponse response = postService.create(postRequest);
 
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
@@ -29,16 +28,17 @@ public class MemberController implements BaseController<MemberRequest, MemberRes
     @GetMapping("/{id}")
     public ResponseEntity read(@PathVariable Long id) {
 
-        MemberResponse memberResponse = memberService.read(id);
-        return new ResponseEntity(memberResponse, HttpStatus.OK);
+        PostResponse response = postService.read(id);
+
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @Override
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable Long id,
-                                 @RequestPart(name = "data") MemberRequest request) {
+                                 @RequestPart(name = "data") PostRequest postRequest) {
 
-        MemberResponse response = memberService.update(id, request);
+        PostResponse response = postService.update(id, postRequest);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
@@ -47,7 +47,7 @@ public class MemberController implements BaseController<MemberRequest, MemberRes
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
 
-        Long deletedId = memberService.delete(id);
+        Long deletedId = postService.delete(id);
 
         if(deletedId == 0) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

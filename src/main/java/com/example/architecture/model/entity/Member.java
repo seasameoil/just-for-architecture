@@ -14,7 +14,7 @@ import lombok.*;
 public class Member extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long memberId;
 
     private String memberName;
     private String nickName;

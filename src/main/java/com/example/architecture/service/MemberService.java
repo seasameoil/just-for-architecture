@@ -1,8 +1,7 @@
 package com.example.architecture.service;
 
-import com.example.architecture.ifs.CrudInterface;
+import com.example.architecture.interfaces.CrudInterface;
 import com.example.architecture.model.entity.Member;
-import com.example.architecture.model.network.Header;
 import com.example.architecture.model.request.MemberRequest;
 import com.example.architecture.model.response.MemberResponse;
 import com.example.architecture.repository.MemberRepository;
@@ -28,7 +27,7 @@ public class MemberService implements CrudInterface<MemberRequest, MemberRespons
 
         Member newMember = memberRepository.save(member);
 
-        MemberResponse memberResponse = buildMember(newMember);
+        MemberResponse memberResponse = buildMemberResponse(newMember);
 
         return memberResponse;
     }
@@ -38,7 +37,7 @@ public class MemberService implements CrudInterface<MemberRequest, MemberRespons
 
         Member member = memberRepository.findById(id).get();
 
-        MemberResponse memberResponse = buildMember(member);
+        MemberResponse memberResponse = buildMemberResponse(member);
 
         return memberResponse;
     }
@@ -55,7 +54,7 @@ public class MemberService implements CrudInterface<MemberRequest, MemberRespons
 
         Member changedMember = memberRepository.save(member);
 
-        MemberResponse memberResponse = buildMember(changedMember);
+        MemberResponse memberResponse = buildMemberResponse(changedMember);
         //System.out.println(changedMember.getMemberName());
 
         return memberResponse;
@@ -74,7 +73,7 @@ public class MemberService implements CrudInterface<MemberRequest, MemberRespons
     }
 
     // <------------- memberResponse 빌드 ------------>
-    private MemberResponse buildMember(Member member) {
+    private MemberResponse buildMemberResponse(Member member) {
         MemberResponse memberResponse = MemberResponse.builder()
                 .memberName(member.getMemberName())
                 .nickName(member.getNickName())

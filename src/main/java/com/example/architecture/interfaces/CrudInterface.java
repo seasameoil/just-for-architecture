@@ -1,6 +1,4 @@
-package com.example.architecture.ifs;
-
-import com.example.architecture.model.network.Header;
+package com.example.architecture.interfaces;
 
 public interface CrudInterface<Request, Response> {
 
