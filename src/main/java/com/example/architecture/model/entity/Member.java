@@ -1,27 +1,18 @@
 package com.example.architecture.model.entity;
 
+import com.example.architecture.model.entity.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Member extends BaseEntity{
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long memberId;
+@Table(name = "member")
+public class Member extends BaseEntity {
 
     private String memberName;
     private String nickName;
     private String password;
-
-    @OneToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id")
-    private List<Post> post;
 }

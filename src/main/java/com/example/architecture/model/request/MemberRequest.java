@@ -1,14 +1,8 @@
 package com.example.architecture.model.request;
 
-import lombok.*;
+import com.example.architecture.model.request.baseRequest.BaseRequest;
 
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class MemberRequest {
+public class MemberRequest extends BaseRequest {
 
     private String memberName;
-    private String nickName;
-    private String password;
 }
