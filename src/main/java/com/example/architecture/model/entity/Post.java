@@ -9,8 +9,11 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder @Table(name = "post")
 public class Post extends BaseEntity {
 
     private String content;
+
+    @ManyToOne
+    private Member member;
 }

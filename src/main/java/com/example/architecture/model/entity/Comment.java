@@ -9,8 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "comment")
 public class Comment extends BaseEntity {
 
     private String content;
     private String nickName;
+
+    @ManyToOne
+    @JoinColumn(name = "post")
+    private Post post;
 }
