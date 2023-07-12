@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestPart;
 
-public interface BaseController<T extends BaseEntity> {
+public interface BaseController<Rq, Rs> {
 
-    ResponseEntity<Object> save(@RequestPart(name = "data") T entity);
-    ResponseEntity<T> findAll();
+    ResponseEntity<Object> save(@RequestPart(name = "data") Rq request);
+    ResponseEntity<Rq> findAll();
     ResponseEntity<String> delete(@PathVariable Long id);
 }

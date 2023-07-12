@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ResponseBody
 @RequiredArgsConstructor
-public class BaseControllerImpl<T extends BaseEntity, R extends JpaRepository<T, Long>> implements BaseController<T> {
-    private final BaseService<T,R> baseService;
+public class BaseControllerImpl<T extends BaseEntity, Rq, Rs, R extends JpaRepository<T, Long>> implements BaseController<Rq, Rs> {
+    private final BaseService<T, Rq, Rs, R> baseService;
 
-    @Override
+    /*@Override
     @PostMapping
     public ResponseEntity<Object> save(T entity) {
         try {
@@ -24,11 +24,22 @@ public class BaseControllerImpl<T extends BaseEntity, R extends JpaRepository<T,
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }*/
+
+    @Override
+    @PostMapping
+    public ResponseEntity<Object> save(Rq request) {
+        try {
+            return new ResponseEntity(baseService.save(request), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     @GetMapping
-    public ResponseEntity<T> findAll() {
+    public ResponseEntity findAll() {
 
         try {
             return new ResponseEntity(baseService.findAll(), HttpStatus.OK);
