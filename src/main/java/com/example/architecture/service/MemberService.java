@@ -7,6 +7,4 @@ import com.example.architecture.repository.MemberRepository;
 import com.example.architecture.service.generic.BaseService;
 
 public interface MemberService extends BaseService<Member, MemberRequest, MemberResponse, MemberRepository> {
-
-    Member update(MemberRequest request);
 }

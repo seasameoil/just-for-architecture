@@ -14,13 +14,4 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, MemberRequest, Me
     public MemberServiceImpl(MemberRepository repository) {
         super(repository);
     }
-
-    @Override
-    public Member update(MemberRequest request) {
-        try {
-            return null;
-        } catch (Exception e) {
-            throw  e;
-        }
-    }
 }

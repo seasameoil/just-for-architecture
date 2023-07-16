@@ -10,4 +10,5 @@ public interface BaseController<Rq, Rs> {
     ResponseEntity<Object> save(@RequestPart(name = "data") Rq request);
     ResponseEntity<Rq> findAll();
     ResponseEntity<String> delete(@PathVariable Long id);
+    ResponseEntity<Rs> update(@RequestPart(name = "data") Rq request, @PathVariable Long id);
 }

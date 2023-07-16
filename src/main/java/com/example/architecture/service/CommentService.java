@@ -5,7 +5,6 @@ import com.example.architecture.model.request.CommentRequest;
 import com.example.architecture.model.response.CommentResponse;
 import com.example.architecture.repository.CommentRepository;
 import com.example.architecture.service.generic.BaseService;
-import org.springframework.stereotype.Service;
 
 public interface CommentService extends BaseService<Comment, CommentRequest, CommentResponse, CommentRepository> {
 }

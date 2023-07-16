@@ -15,17 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class BaseControllerImpl<T extends BaseEntity, Rq, Rs, R extends JpaRepository<T, Long>> implements BaseController<Rq, Rs> {
     private final BaseService<T, Rq, Rs, R> baseService;
 
-    /*@Override
-    @PostMapping
-    public ResponseEntity<Object> save(T entity) {
-        try {
-            return new ResponseEntity(baseService.save(entity), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
-
     @Override
     @PostMapping
     public ResponseEntity<Object> save(Rq request) {
@@ -58,6 +47,18 @@ public class BaseControllerImpl<T extends BaseEntity, Rq, Rs, R extends JpaRepos
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    @PatchMapping("/{id}")
+    public ResponseEntity<Rs> update(Rq request, @PathVariable Long id) {
+
+        try {
+            Rs response = baseService.update(request, id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

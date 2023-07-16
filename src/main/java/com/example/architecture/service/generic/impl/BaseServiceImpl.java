@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -50,6 +51,21 @@ public class BaseServiceImpl<T extends BaseEntity, Rq, Rs, R extends JpaReposito
         }
     }
 
+    @Override
+    public Rs update(Rq request, Long id) throws Exception {
+        try {
+
+            Optional<T> entity = repository.findById(id);
+            modelMapper.map(entity, getRequestType());
+
+            Rs response = modelMapper.map(entity, getResponseType());
+            return response;
+
+        } catch (Exception e) {
+            throw  e;
+        }
+    }
+
     // Helper method to get the entity type
     private Class<T> getEntityType() {
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
@@ -60,5 +76,10 @@ public class BaseServiceImpl<T extends BaseEntity, Rq, Rs, R extends JpaReposito
     private Class<Rs> getResponseType() {
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         return (Class<Rs>) parameterizedType.getActualTypeArguments()[2];
+    }
+
+    private Class<Rq> getRequestType() {
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        return (Class<Rq>) parameterizedType.getActualTypeArguments()[1];
     }
 }

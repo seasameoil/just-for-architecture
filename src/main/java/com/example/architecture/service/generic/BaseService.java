@@ -10,4 +10,5 @@ public interface BaseService<T extends BaseEntity, Rq, Rs , R extends JpaReposit
     List<Rs> findAll() throws Exception;
     Rs save(Rq request) throws Exception;
     void delete(Long id) throws Exception;
+    Rs update(Rq request, Long id) throws Exception;
 }
