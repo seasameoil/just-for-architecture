@@ -38,12 +38,24 @@ public class PostServiceImpl extends BaseServiceImpl<Post, PostRequest, PostResp
 
         Member member = optionalMember.get();
 
-        System.out.println(request.getContent());
         Post post = modelMapper.map(request, Post.class);
         post.setMember(member);
 
         postRepository.save(post);
 
         return modelMapper.map(post, PostResponse.class);
+    }
+
+    @Override
+    public PostResponse update(PostRequest request, Long id) throws Exception {
+        try {
+
+            Post post = postRepository.findById(id).get();
+            post.update(request);
+
+            return modelMapper.map(request, PostResponse.class);
+        } catch (Exception e) {
+            throw  e;
+        }
     }
 }

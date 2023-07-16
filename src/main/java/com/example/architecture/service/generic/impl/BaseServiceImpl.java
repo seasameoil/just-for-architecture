@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -31,6 +32,7 @@ public class BaseServiceImpl<T extends BaseEntity, Rq, Rs, R extends JpaReposito
     }
 
     @Override
+    @Transactional
     public Rs save(Rq request) throws Exception {
         try {
             T entity = modelMapper.map(request, getEntityType());
@@ -42,6 +44,7 @@ public class BaseServiceImpl<T extends BaseEntity, Rq, Rs, R extends JpaReposito
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws Exception {
         try {
             repository.deleteById(id);
@@ -51,13 +54,10 @@ public class BaseServiceImpl<T extends BaseEntity, Rq, Rs, R extends JpaReposito
     }
 
     @Override
+    @Transactional
     public Rs update(Rq request, Long id) throws Exception {
         try {
-
-            T entity = modelMapper.map(request, getEntityType());
-            Rs response = modelMapper.map(entity, getResponseType());
-            return response;
-
+            return null;
         } catch (Exception e) {
             throw  e;
         }
