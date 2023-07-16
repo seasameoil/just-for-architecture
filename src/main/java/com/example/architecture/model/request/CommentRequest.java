@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class MemberRequest {
+public class CommentRequest {
 
-    private String memberName;
+    private String content;
     private String nickName;
-    private String password;
+    private Long postId;
 }
