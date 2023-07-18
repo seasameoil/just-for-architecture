@@ -8,3 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
+jwt:
+  secret: MlwEyVEsYt9V7zq93TejMnVXyzblYcfPQye37f7MGVA9XkHaadb32dF
+  access-token-validity-in-seconds: 600 # 10min
