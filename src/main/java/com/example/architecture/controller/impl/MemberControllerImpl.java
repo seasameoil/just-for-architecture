@@ -2,7 +2,6 @@ package com.example.architecture.controller.impl;
 
 import com.example.architecture.controller.MemberController;
 import com.example.architecture.controller.generic.impl.BaseControllerImpl;
-import com.example.architecture.jwt.TokenInfo;
 import com.example.architecture.model.entity.Member;
 import com.example.architecture.model.request.LoginRequest;
 import com.example.architecture.model.request.MemberRequest;
@@ -28,11 +27,9 @@ public class MemberControllerImpl extends BaseControllerImpl<Member, MemberReque
     }
 
     @PostMapping("/login")
-    public TokenInfo login(@RequestPart(name = "login")LoginRequest loginRequest) {
+    public String login(@RequestPart(name = "login")LoginRequest loginRequest) {
 
-        String nickName = loginRequest.getNickName();
-        String password = loginRequest.getPassword();
-        TokenInfo tokenInfo = memberService.login(nickName, password);
+        String tokenInfo = memberService.login(loginRequest);
         return tokenInfo;
     }
 }

@@ -33,7 +33,7 @@ public class Member extends BaseEntity implements UserDetails {
 
         this.memberName = memberRequest.getMemberName();
         this.nickName = memberRequest.getNickName();
-        this.password = memberRequest.getPassword();
+        // this.password = memberRequest.getPassword();
     }
 
     @Override
