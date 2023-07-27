@@ -47,7 +47,8 @@ public class BaseServiceImpl<T extends BaseEntity, Rq, Rs, R extends JpaReposito
     @Transactional
     public void delete(Long id) throws Exception {
         try {
-            repository.deleteById(id);
+            T entity = repository.findById(id).get();
+            entity.setDeleted(true);
         } catch (Exception e) {
             throw e;
         }

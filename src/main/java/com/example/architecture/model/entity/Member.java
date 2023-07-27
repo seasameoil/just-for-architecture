@@ -4,6 +4,7 @@ import com.example.architecture.model.entity.baseEntity.BaseEntity;
 import com.example.architecture.model.request.MemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Where(clause = "is_deleted = false")
 @Table(name = "member")
 public class Member extends BaseEntity implements UserDetails {
 

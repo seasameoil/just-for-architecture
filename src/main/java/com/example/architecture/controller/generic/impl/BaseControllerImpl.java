@@ -39,7 +39,7 @@ public class BaseControllerImpl<T extends BaseEntity, Rq, Rs, R extends JpaRepos
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @PatchMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         try {
             baseService.delete(id);
